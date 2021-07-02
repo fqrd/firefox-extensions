@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Private Block Site",
     "description": "Blocks access to specified website.",
-    "version": "1.0",
+    "version": "1.1",
     "options_ui": {
       "page": "options.html",
       "browser_style": true
