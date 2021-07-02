@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "Private Block Site",
+    "description": "Blocks access to specified website.",
+    "version": "1.0",
+    "options_ui": {
+      "page": "options.html",
+      "browser_style": true
+    },
+    "permissions": ["storage", "tabs"],
+    "background": {
+      "scripts": ["background.js"]
+    },
+    "incognito": "spanning",
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "5a89517ff62875601e5bbc48262b34b8e1aac733@temporary-addon"
+      }
+    }
+  }
