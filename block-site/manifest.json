@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Private Block Site",
-    "description": "Blocks access to specified website. Respecting your privacy.",
+    "description": "Block access to specified domains. Respecting your privacy.",
     "version": "1.2",
     "options_ui": {
 		"page": "options.html",
@@ -16,5 +16,9 @@
 		"gecko": {
 		  "id": "5a89517ff62875601e5bbc48262b34b8e1aac733@temporary-addon"
 		}
-	  }
+	},
+	"icons": {
+		"48": "./icons/icon48.png",
+		"96": "./icons/icon96.png"
+	}
   }

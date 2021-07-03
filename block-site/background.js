@@ -14,7 +14,6 @@ chrome.runtime.onInstalled.addListener(function () {
 
 		if(typeof local.locked !== "boolean")
 		{
-			console.log("NOT BOOLEAN");
 			chrome.storage.local.set({locked: false});
 		}
 	});

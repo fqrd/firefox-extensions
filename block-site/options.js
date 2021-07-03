@@ -5,7 +5,7 @@ const temporaryBtn = document.getElementById("temporary-btn");
 const foreverBtn = document.getElementById("forever-btn");
 const updateBtn = document.getElementById("update-btn");
 const lockBtn = document.getElementById("lock-btn");
-const displayDeadline = document.getElementById("display-deadline");
+const deadlineOutput = document.getElementById("display-deadline");
 const dateDeadline = document.getElementById("date-deadline-input");
 const timeDeadline = document.getElementById("time-deadline-input");
 
@@ -13,9 +13,7 @@ const timeDeadline = document.getElementById("time-deadline-input");
 window.addEventListener("DOMContentLoaded", () => {
   chrome.storage.local.get(["blocked", "forever", "deadline", "locked"], function (local) {
     const { blocked, forever, deadline, locked} = local;
-	// console.log(local);
 	const format = new Date(deadline);
-	
 	dateDeadline.value = getDate(format);
 	timeDeadline.value = getTime(format);
 	if (Array.isArray(blocked)) {
@@ -31,8 +29,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	}
 	else
 	{
-		const content = document.createTextNode(`Locked until: ${getDate(format)} ${getTime(format)}.`);
-		displayDeadline.appendChild(content);
+		displayDeadline(format);
 	}
   });
 });
@@ -104,6 +101,7 @@ lockBtn.addEventListener("click", () => {
 		{
 			chrome.storage.local.set({ locked: true });
 			hideElements(true);
+			displayDeadline(new Date(local.deadline));
 		}
 	});
 });
@@ -111,8 +109,9 @@ lockBtn.addEventListener("click", () => {
 // returns the proper date+time timestamp
 function createDeadline()
 {
-	const str = dateDeadline.value + ", "+timeDeadline.value;
-	let deadline = new Date(str);
+	const d = dateDeadline.value.split('-');
+	const t = timeDeadline.value.split(':');
+	let deadline = new Date(d[0], d[1] - 1, d[2], t[0], t[1]);
 	return Date.parse(deadline);
 }
 
@@ -143,4 +142,10 @@ function hideElements(toggle)
 	hidden.forEach(el => {
 		el.style.display = display;
 	})	
+}
+
+function displayDeadline(format)
+{
+	const content = document.createTextNode(`Locked until: ${getDate(format)} ${getTime(format)}.`);
+	deadlineOutput.appendChild(content);
 }
